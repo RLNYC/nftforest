@@ -1,17 +1,8 @@
-# `ethereum-boilerplate-NFT-Marketplace`
-
-This Project is a fork of Ethereum Boilerplate and demostrates how you can build your own NFT Marketplace. This project of course work on any EVM-compatible blockchain such as Polygon, Avalanche, Binance Smart Chain and other such chains.
-
-![Preview](preview.gif)
-
-# ⭐️ `Star us`
-If this boilerplate helps you build Ethereum dapps faster - please star this project, every star makes us very happy!
+# NFT Forest
 
 # 🚀 Quick Start
 
-📄 Clone or fork `ethereum-nft-marketplace-boilerplate`:
-```sh
-git clone https://github.com/ethereum-boilerplate/ethereum-nft-marketplace-boilerplate.git
+📄 Clone or fork this repo:
 ```
 💿 Install all dependencies:
 ```sh
@@ -31,23 +22,8 @@ const [contractABI, setContractABI] = useState();
 const [marketAddress, setMarketAddress] = useState();
 ```
 
-🔃 Sync the `MarketItemCreated` event `/src/contracts/marketplaceBoilerplate.sol` contract with your Moralis Server, making the tableName `MarketItems`
-```jsx
-event MarketItemCreated (
-  uint indexed itemId,
-  address indexed nftContract,
-  uint256 indexed tokenId,
-  address seller,
-  address owner,
-  uint256 price,
-  bool sold
-);
-```
-
-
 🚴‍♂️ Run your App:
 ```sh
 yarn start
 ```
-
 
