@@ -6,7 +6,7 @@ import {
   useMoralisQuery,
   useNewMoralisObject,
 } from "react-moralis";
-import { Card, Image, Tooltip, Modal, Badge, Alert, Spin } from "antd";
+import { Card, Image, Tooltip, Typography, Modal, Badge, Alert, Spin } from "antd";
 import { useNFTTokenIds } from "hooks/useNFTTokenIds";
 import {
   FileSearchOutlined,
@@ -26,7 +26,17 @@ const styles = {
     justifyContent: "flex-start",
     margin: "0 auto",
     maxWidth: "1000px",
-    gap: "10px",
+    gap: "30px",
+  },
+  NFTs_header: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  NFTs_price: {
+    fontSize: '20px'
+  },
+  NFTs_price_text: {
+    marginTop: '-7px'
   },
   banner: {
     display: "flex",
@@ -223,13 +233,13 @@ function NFTTokenIds({ inputValue, setInputValue }) {
               <Card
                 hoverable
                 actions={[
-                  <Tooltip title="View Collection">
-                    <RightCircleOutlined
+                  <Tooltip title="Add to Cart">
+                    <ShoppingCartOutlined
                       onClick={() => setInputValue(nft?.addrs)}
                     />
                   </Tooltip>,
                 ]}
-                style={{ width: 240, border: "2px solid #e7eaf3" }}
+                style={{ width: 340, border: "2px solid #e7eaf3" }}
                 cover={
                   <Image
                     preview={false}
@@ -241,7 +251,33 @@ function NFTTokenIds({ inputValue, setInputValue }) {
                 }
                 key={index}
               >
-                <Meta title={nft.name} />
+                <div style={styles.NFTs_header}>
+                  <Meta title={nft.name} style={{ fontSize: '30px' }} />
+                  <div>
+                    <Typography.Text type="success" style={styles.NFTs_price}>
+                      ${nft.price}
+                    </Typography.Text>
+                    <p style={styles.NFTs_price_text}>per tree</p>
+                  </div>
+                </div>
+                
+                <Typography.Text type="success">
+                  Age: Under 1 year old
+                </Typography.Text>
+                <br />
+                <Typography.Text type="success">
+                  Time before harvesting: {nft.harvestingTime} years
+                </Typography.Text>
+                <br />
+                <p style={{ marginTop: '10px'}}><strong>Benefits</strong></p>
+                <Typography.Text type="success">
+                  Estimated CO2 absorption: ${nft.CO2_absorption} ton/per year
+                </Typography.Text>
+                <br />
+                <Typography.Text type="success">
+                  Expected gross grain: ${nft.grossGrain}
+                </Typography.Text>
+                <br />
               </Card>
             ))}
 
