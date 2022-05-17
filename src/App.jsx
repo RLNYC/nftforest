@@ -10,6 +10,7 @@ import {
 import Account from "components/Account";
 import Chains from "components/Chains";
 import NFTBalance from "components/NFTBalance";
+import Landing from "components/Landing";
 import NFTTokenIds from "components/NFTTokenIds";
 import { Menu, Layout} from "antd";
 import "antd/dist/antd.css";
@@ -77,8 +78,11 @@ const App = ({ isServerInfo }) => {
               marginLeft: "50px",
               width: "100%",
             }}
-            defaultSelectedKeys={["nftMarket"]}
+            defaultSelectedKeys={["landing"]}
           >
+            <Menu.Item key="landing" onClick={() => setInputValue("explore")} >
+              <NavLink to="/">🏠 Home</NavLink>
+            </Menu.Item>
             <Menu.Item key="nftMarket" onClick={() => setInputValue("explore")} >
               <NavLink to="/NFTMarketPlace">🛒 Explore Market</NavLink>
             </Menu.Item>
@@ -106,8 +110,11 @@ const App = ({ isServerInfo }) => {
             <Route path="/Transactions">
               <NFTMarketTransactions />
             </Route>
+            <Route path="/">
+              <Landing />
+            </Route>
           </Switch>
-          <Redirect to="/NFTMarketPlace" />
+          <Redirect to="/" />
         </div>
       </Router>
       <Footer style={{ textAlign: "center" }}>
