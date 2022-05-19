@@ -6,11 +6,12 @@ import {
   useMoralisQuery,
   useNewMoralisObject,
 } from "react-moralis";
-import { Card, Image, Tooltip, Typography, Modal, Badge, Alert, Spin } from "antd";
+import { Card, Image, Tooltip, Typography, Modal, Badge, Alert, Spin, Button } from "antd";
+import { SmileOutlined, PlusOutlined } from '@ant-design/icons';
 import { useNFTTokenIds } from "hooks/useNFTTokenIds";
 import {
   FileSearchOutlined,
-  RightCircleOutlined,
+  MinusOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { useMoralisDapp } from "providers/MoralisDappProvider/MoralisDappProvider";
@@ -37,6 +38,10 @@ const styles = {
   },
   NFTs_price_text: {
     marginTop: '-7px'
+  },
+  NFTs_buttons: {
+    display: 'flex',
+    justifyContent: 'center'
   },
   banner: {
     display: "flex",
@@ -72,6 +77,10 @@ function NFTTokenIds({ inputValue, setInputValue }) {
   const [visible, setVisibility] = useState(false);
   const [nftToBuy, setNftToBuy] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const [tree1Amount, setTree1Amount] = useState(0);
+  const [tree2Amount, setTree2Amount] = useState(0);
+
   const contractProcessor = useWeb3ExecuteFunction();
   const { chainId, marketAddress, contractABI, walletAddress } =
     useMoralisDapp();
@@ -178,6 +187,22 @@ function NFTTokenIds({ inputValue, setInputValue }) {
     return result;
   };
 
+  const addTreeToCart = (index) => {
+    if(index === 0) {
+      setTree1Amount(tree1Amount + 1);
+    } else {
+      setTree2Amount(tree2Amount + 1);
+    }
+  }
+
+  const removeTreeFromCart = (index) => {
+    if(index === 0) {
+      setTree1Amount(tree1Amount - 1);
+    } else {
+      setTree2Amount(tree2Amount - 1);
+    }
+  }
+
   return (
     <>
       <div>
@@ -233,6 +258,11 @@ function NFTTokenIds({ inputValue, setInputValue }) {
               <Card
                 hoverable
                 actions={[
+                  <div style={styles.NFTs_buttons}>
+                    <Button shape="circle" icon={<MinusOutlined />} size="small" onClick={() => removeTreeFromCart(index)} />
+                    <p style={{ margin: '0 7px'}}>{index === 0 ? tree1Amount : tree2Amount}</p>
+                    <Button shape="circle" icon={<PlusOutlined />} size="small" onClick={() => addTreeToCart(index)} />
+                  </div>,
                   <Tooltip title="Add to Cart">
                     <ShoppingCartOutlined
                       onClick={() => setInputValue(nft?.addrs)}
