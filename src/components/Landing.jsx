@@ -4,12 +4,22 @@ import { Row, Col, Card, Typography, Button } from 'antd';
 import { SmileOutlined, GlobalOutlined, SolutionOutlined, DollarCircleOutlined } from '@ant-design/icons';
 
 import HomeImg from '../assets/home-img.png';
+import HomeImg2 from '../assets/home-img2.png';
 
 const styles = {
   Landing: {
     WebkitBoxPack: "start",
     margin: "0 auto",
     maxWidth: "1000px",
+  },
+  SubHeader: {
+    color: '#3AA628',
+    fontSize: '26px',
+    marginBottom: '-10px'
+  },
+  SubHeader2: {
+    color: '#3AA628',
+    fontSize: '22px',
   },
 };
 
@@ -22,8 +32,8 @@ function Landing() {
         <Typography.Title style={{ marginTop: '3rem', marginBottom: 0}}>
           Build Your Forest 
         </Typography.Title>
-        <h2>Buy Trees</h2>
-        <h2>Earn CO2 Credits</h2>
+        <p style={styles.SubHeader}>Buy Trees</p>
+        <p style={styles.SubHeader}>Earn CO2 Credits</p>
         <br />
         <Button className="primary-bg-color" type="primary" size="large" onClick={() => history.push('/NFTMarketPlace')}>
           Get STARTED
@@ -78,6 +88,35 @@ function Landing() {
         </Card>
       </Col>
     </Row>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <Row gutter={16}>
+      <Col className="gutter-row" xs={{ span: 32 }} md={{ span: 12 }}>
+        <Typography.Title style={{ marginTop: '3rem', marginBottom: 0}}>
+          Are you in a giving mood?
+        </Typography.Title>
+        <h2 style={styles.SubHeader2}>Send Trees as a gift to your family and friends!</h2>
+        <p>After your tree purchase, you can send it as a gift.</p>
+        <br />
+        <Button className="primary-bg-color" type="primary" size="large" onClick={() => history.push('/NFTMarketPlace')}>
+          Get STARTED
+        </Button>
+      </Col>
+      <Col className="gutter-row" xs={{ span: 32 }} md={{ span: 12 }}>
+        <center>
+          <img src={HomeImg2} alt="Home" width={300}/>
+        </center>
+      </Col>
+    </Row>
+
+    <br />
+    <br />
+    <br />
   </div>;
 }
 

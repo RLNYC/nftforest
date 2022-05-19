@@ -18,3 +18,7 @@
   overflow: auto;
   border-radius: 1rem;
 }
+
+.primary-bg-color {
+  background-color: #3AA628 !important;
+}
