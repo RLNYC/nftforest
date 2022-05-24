@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default; // eslint-disable-line
 mapboxgl.accessToken = "pk.eyJ1Ijoic3Rha2VzaGFyZSIsImEiOiJjbDNqZHg4ZTExdjJ2M2pyc29qYW1sd3h2In0.wGS3kVEj1v6o6TN1gVSTsw";
 
 function ForestMap() {
