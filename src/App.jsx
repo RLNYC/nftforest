@@ -12,6 +12,7 @@ import Chains from "components/Chains";
 import NFTBalance from "components/NFTBalance";
 import Landing from "components/Landing";
 import NFTTokenIds from "components/NFTTokenIds";
+import ForestMap from "components/ForestMap";
 import { Menu, Layout} from "antd";
 import "antd/dist/antd.css";
 import NativeBalance from "components/NativeBalance";
@@ -54,8 +55,6 @@ const App = ({ isServerInfo }) => {
   const { isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading } =
     useMoralis();
 
-
-
   const [inputValue, setInputValue] = useState("explore");
 
   useEffect(() => {
@@ -80,11 +79,14 @@ const App = ({ isServerInfo }) => {
             }}
             defaultSelectedKeys={["landing"]}
           >
-            <Menu.Item key="landing" onClick={() => setInputValue("explore")} >
+            <Menu.Item key="landing">
               <NavLink to="/">🏠 Home</NavLink>
             </Menu.Item>
-            <Menu.Item key="nftMarket" onClick={() => setInputValue("explore")} >
+            <Menu.Item key="nftMarket">
               <NavLink to="/NFTMarketPlace">🛒 Explore Market</NavLink>
+            </Menu.Item>
+            <Menu.Item key="forestmap">
+              <NavLink to="/forestmap">🗺️ Forest Map</NavLink>
             </Menu.Item>
             <Menu.Item key="nft">
               <NavLink to="/nftBalance">🖼 Your Collection</NavLink>
@@ -106,6 +108,9 @@ const App = ({ isServerInfo }) => {
             </Route>
             <Route path="/NFTMarketPlace">
               <NFTTokenIds inputValue={inputValue} setInputValue={setInputValue}/>
+            </Route>
+            <Route path="/forestmap">
+              <ForestMap />
             </Route>
             <Route path="/Transactions">
               <NFTMarketTransactions />
