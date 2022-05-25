@@ -1,18 +1,7 @@
 export const MARKET_ADDRESS = "0x62345f0B4002E9C028BF39361dC438F5868F84F9";
 export const CONTRACT_ABI = `[
 	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "name_",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "symbol_",
-				"type": "string"
-			}
-		],
+		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
@@ -89,6 +78,55 @@ export const CONTRACT_ABI = `[
 			}
 		],
 		"name": "Transfer",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "cid",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timeBeforeCutting",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "expectedTimberValue",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "estimatedCO2Aborption",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "trunkSize",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"name": "TreeCreated",
 		"type": "event"
 	},
 	{
@@ -169,6 +207,94 @@ export const CONTRACT_ABI = `[
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "listoftrees",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "cid",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timeBeforeCutting",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "expectedTimberValue",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "estimatedCO2Aborption",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "trunkSize",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_cid",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_timeBeforeCutting",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_expectedTimberValue",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_estimatedCO2Aborption",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_trunkSize",
+				"type": "uint256"
+			}
+		],
+		"name": "mintTree",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -344,6 +470,19 @@ export const CONTRACT_ABI = `[
 		"name": "transferFrom",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "treeIds",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "_value",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	}
 ]`;

@@ -17,6 +17,7 @@ import {
 import { useMoralisDapp } from "providers/MoralisDappProvider/MoralisDappProvider";
 import { getExplorer } from "helpers/networks";
 import { useWeb3ExecuteFunction } from "react-moralis";
+import axios from "axios";
 const { Meta } = Card;
 
 const styles = {
@@ -102,23 +103,45 @@ function NFTTokenIds({ inputValue, setInputValue }) {
       "confirmed",
     ])
   );
-  const purchaseItemFunction = "createMarketSale";
+  const mintTreeFunction = "mintTree";
   const NFTCollections = getCollectionsByChain(chainId);
 
   async function purchase() {
     setLoading(true);
-    const tokenDetails = getMarketItem(nftToBuy);
-    const itemID = tokenDetails.itemId;
-    const tokenPrice = tokenDetails.price;
+
+    const fileData = JSON.stringify({
+      location: [-106.8856, 40.4776],
+      isNew: true,
+      dateOfPlanting: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`,
+      treeType: "Red Oak"
+    });
+    
+    const blob = new Blob([fileData], {type: "text/plain"});
+    let data = new FormData();
+    data.append('file', blob);
+
+    const res = await axios.post("https://api.pinata.cloud/pinning/pinFileToIPFS", data, {
+      maxContentLength: "Infinity",
+      headers: {
+        pinata_api_key: process.env.REACT_APP_PINATA_API_KEY, 
+        pinata_secret_api_key: process.env.REACT_APP_PINATA_SECRET_API_KEY,
+      },
+    })
+
+    console.log(res);
+
     const ops = {
       contractAddress: marketAddress,
-      functionName: purchaseItemFunction,
+      functionName: mintTreeFunction,
       abi: contractABIJson,
       params: {
-        nftContract: nftToBuy.token_address,
-        itemId: itemID,
+        _cid: res.data.IpfsHash,
+        _timeBeforeCutting: "1",
+        _expectedTimberValue: "1",
+        _estimatedCO2Aborption: "1",
+        _trunkSize: 1
       },
-      msgValue: tokenPrice,
+      msgValue: "1"
     };
 
     await contractProcessor.fetch({
@@ -127,10 +150,10 @@ function NFTTokenIds({ inputValue, setInputValue }) {
         console.log("success");
         setLoading(false);
         setVisibility(false);
-        updateSoldMarketItem();
         succPurchase();
       },
       onError: (error) => {
+        console.error(error);
         setLoading(false);
         failPurchase();
       },
@@ -265,7 +288,7 @@ function NFTTokenIds({ inputValue, setInputValue }) {
                   </div>,
                   <Tooltip title="Add to Cart">
                     <ShoppingCartOutlined
-                      onClick={() => setInputValue(nft?.addrs)}
+                      onClick={() => purchase()}
                     />
                   </Tooltip>,
                 ]}
