@@ -51,4 +51,29 @@ contract TreeNFTMarketplace is ERC721URIStorage {
 
       return newTreeId;
     }
+
+  function fetchUserTreeNFTs(address _userAddress) public view returns (Tree[] memory) {
+    uint totalNFTCount = treeIds.current();
+    uint itemCount = 0;
+    uint currentIndex = 0;
+
+    for (uint i = 0; i < totalNFTCount; i++) {
+      if (listoftrees[i + 1].owner == _userAddress) {
+        itemCount += 1;
+      }
+    }
+
+    Tree[] memory items = new Tree[](itemCount);
+
+    for (uint i = 0; i < totalNFTCount; i++) {
+      if (listoftrees[i + 1].owner == _userAddress) {
+        uint currentId = i + 1;
+        Tree storage currentTree = listoftrees[currentId];
+        items[currentIndex] = currentTree;
+        currentIndex += 1;
+      }
+    }
+
+    return items;   
+  }
 }
