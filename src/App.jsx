@@ -91,9 +91,6 @@ const App = ({ isServerInfo }) => {
             <Menu.Item key="nft">
               <NavLink to="/nftBalance">🖼 Your Collection</NavLink>
             </Menu.Item>
-            <Menu.Item key="transactions">
-              <NavLink to="/Transactions">📑 Your Transactions</NavLink>
-            </Menu.Item>
           </Menu>
           <div style={styles.headerRight}>
             <Chains />

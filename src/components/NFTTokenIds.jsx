@@ -106,16 +106,16 @@ function NFTTokenIds({ inputValue, setInputValue }) {
   const mintTreeFunction = "mintTree";
   const NFTCollections = getCollectionsByChain(chainId);
 
-  async function purchase() {
+  async function purchase(treeName) {
     setLoading(true);
 
     const fileData = JSON.stringify({
-      location: [-106.8856, 40.4776],
+      location: [-106.2856, 40.6776],
       isNew: true,
       dateOfPlanting: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`,
-      treeType: "Red Oak"
+      treeType: treeName
     });
-    
+
     const blob = new Blob([fileData], {type: "text/plain"});
     let data = new FormData();
     data.append('file', blob);
@@ -288,7 +288,7 @@ function NFTTokenIds({ inputValue, setInputValue }) {
                   </div>,
                   <Tooltip title="Add to Cart">
                     <ShoppingCartOutlined
-                      onClick={() => purchase()}
+                      onClick={() => purchase(nft.name)}
                     />
                   </Tooltip>,
                 ]}
