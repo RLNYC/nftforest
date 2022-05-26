@@ -4,6 +4,7 @@ import mapboxgl from 'mapbox-gl';
 import { useMoralis } from "react-moralis";
 import { useMoralisDapp } from "providers/MoralisDappProvider/MoralisDappProvider";
 import { useWeb3ExecuteFunction } from "react-moralis";
+import NFTForestTable from './NFTForestTable';
 
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default; // eslint-disable-line
 mapboxgl.accessToken = "pk.eyJ1Ijoic3Rha2VzaGFyZSIsImEiOiJjbDNqZHg4ZTExdjJ2M2pyc29qYW1sd3h2In0.wGS3kVEj1v6o6TN1gVSTsw";
@@ -14,6 +15,7 @@ function ForestMap() {
   const [lng, setLng] = useState(-107.6089 );
   const [lat, setLat] = useState(42.3024);
   const [zoom, setZoom] = useState(5);
+  const [forest, setForest] = useState([]);
 
   const { chainId, marketAddress, contractABI, walletAddress } =
     useMoralisDapp();
@@ -44,15 +46,6 @@ function ForestMap() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function loadNFT(map) {
-    const getTreeCountOptions = {
-      contractAddress: marketAddress,
-      functionName: "treeIds",
-      abi: contractABIJson,
-    };
-    
-    const totalTreeNFTs = await Moralis.executeFunction(getTreeCountOptions);
-    console.log(totalTreeNFTs);
-
     const treeOptions = {
       contractAddress: marketAddress,
       functionName: "fetchUserTreeNFTs",
@@ -64,10 +57,15 @@ function ForestMap() {
     
     const treesList = await Moralis.executeFunction(treeOptions);
     console.log(treesList);
+    let list = [];
 
     treesList.map(async (t) => {
       const { data } = await axios.get("https://gateway.pinata.cloud/ipfs/" + t.cid);
       console.log(data);
+      data.tokenId = t.tokenId;
+      data.estimatedCO2Aborption = t.estimatedCO2Aborption;
+      list.push(data);
+
       new mapboxgl.Marker()
       .setLngLat(data.location)
       .setPopup(
@@ -77,6 +75,9 @@ function ForestMap() {
           )
       )
       .addTo(map);
+      console.log(data);
+      console.log(list);
+      setForest([...list]);
     })
   }
 
@@ -88,6 +89,8 @@ function ForestMap() {
         </div>
       </div>
       <div id='map'></div>
+      <br />
+      <NFTForestTable forest={forest} />
     </div>
   )
 }

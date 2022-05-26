@@ -18,7 +18,6 @@ import "antd/dist/antd.css";
 import NativeBalance from "components/NativeBalance";
 import "./style.css";
 import Text from "antd/lib/typography/Text";
-import NFTMarketTransactions from "components/NFTMarketTransactions";
 const { Header, Footer } = Layout;
 
 const styles = {
@@ -108,9 +107,6 @@ const App = ({ isServerInfo }) => {
             </Route>
             <Route path="/forestmap">
               <ForestMap />
-            </Route>
-            <Route path="/Transactions">
-              <NFTMarketTransactions />
             </Route>
             <Route path="/">
               <Landing />
