@@ -108,9 +108,11 @@ function NFTTokenIds({ inputValue, setInputValue }) {
 
   async function purchase(treeName) {
     setLoading(true);
+    const r1 = Math.random();
+    const r2 = Math.random();
 
     const fileData = JSON.stringify({
-      location: [-106.2856, 40.6776],
+      location: [-106 + +r1, 40 + +r2],
       isNew: true,
       dateOfPlanting: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`,
       treeType: treeName
@@ -144,13 +146,13 @@ function NFTTokenIds({ inputValue, setInputValue }) {
       msgValue: "1"
     };
 
-    await contractProcessor.fetch({
+    const transaction = await contractProcessor.fetch({
       params: ops,
-      onSuccess: () => {
-        console.log("success");
+      onSuccess: (msg) => {
+        console.log("success", msg);
         setLoading(false);
         setVisibility(false);
-        succPurchase();
+        succPurchase(msg);
       },
       onError: (error) => {
         console.error(error);
@@ -158,6 +160,7 @@ function NFTTokenIds({ inputValue, setInputValue }) {
         failPurchase();
       },
     });
+    console.log(transaction);
   }
 
   const handleBuyClick = (nft) => {
@@ -166,11 +169,11 @@ function NFTTokenIds({ inputValue, setInputValue }) {
     setVisibility(true);
   };
 
-  function succPurchase() {
-    let secondsToGo = 5;
+  function succPurchase(msg) {
+    let secondsToGo = 10;
     const modal = Modal.success({
       title: "Success!",
-      content: `You have purchased this NFT`,
+      content: `You have purchased this NFT and got back ${msg.events.TreeCreated.returnValues.precentGiveBack}%`,
     });
     setTimeout(() => {
       modal.destroy();
