@@ -31,6 +31,10 @@ coverage
 coverage.json
 typechain
 
+.firebase
+.firebaserc
+firebase.json
+
 #Truffle files
 /Truffle/build
 /Truffle/data

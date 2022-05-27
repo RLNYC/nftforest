@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Space } from "antd";
+import { Table } from "antd";
 
 const styles = {
   table: {
@@ -8,46 +8,12 @@ const styles = {
   },
 };
 
-function NFTForestTable({ forest }) {
-  const columns = [
-    {
-      title: "Name",
-      dataIndex: "treeType",
-      key: "treeType",
-    },
-    {
-      title: "Tree ID",
-      dataIndex: "treeId",
-      key: "treeId",
-    },
-    {
-      title: "Tree Planted",
-      dataIndex: "dateOfPlanting",
-      key: "dateOfPlanting",
-    },
-    {
-      title: "CO2 Absorption per Tree",
-      key: "estimatedCO2Aborption",
-      render: (text, record) => (
-        <Space size="middle">
-          <span>{record.estimatedCO2Aborption} ton/year</span>
-        </Space>
-      ),
-    },
-  ];
-
-  const data = forest?.map((item, index) => ({
-    key: index,
-    treeType: item.treeType,
-    treeId: item.tokenId,
-    dateOfPlanting: item.dateOfPlanting,
-    estimatedCO2Aborption: item.estimatedCO2Aborption
-  }));
-
+function NFTForestTable({ name, columns, data }) {
   return (
     <>
       <div>
         <div style={styles.table}>
+          <h2>{name}</h2>
           <Table columns={columns} dataSource={data} />
         </div>
       </div>
