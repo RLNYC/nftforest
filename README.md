@@ -2,6 +2,13 @@
 
 # 🚀 Quick Start
 
+Sponsor Tech Components:
+- Chainlink: Chainlink VRF is used to generate rebate after purchasing
+- Polygon: Dapp is deployed to Polygon Testnet 
+- IPFS: Use Pinata to store images and Off-chain data of tree on IPFS
+- Moralis: Use Moralis login and SDK to interact with smart contract
+- Covalent: Obtain user wallet data
+
 📄 Clone or fork this repo:
 ```
 💿 Install all dependencies:
