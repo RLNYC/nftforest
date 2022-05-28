@@ -56,17 +56,10 @@ function ForestMap() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function loadNFT(map) {
-    const treeOptions = {
-      contractAddress: marketAddress,
-      functionName: "fetchUserTreeNFTs",
-      abi: contractABIJson,
-      params: {
-        _userAddress: walletAddress
-      }
-    };
-    
-    const treesList = await Moralis.executeFunction(treeOptions);
-    console.log(treesList);
+    const res = await fetch(`https://api.covalenthq.com/v1/80001/address/${givingAddress}/balances_v2/?key=${process.env.REACT_APP_COVALENT_API_KEY}`);
+    const { data } = await res.json();
+    const treesList = data.items[1].nft_data;
+
     let list = [{
       key: "0",
       treeType: "Maple",
