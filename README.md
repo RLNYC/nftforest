@@ -1,13 +1,13 @@
 # NFT Forest
 
-# 🚀 Quick Start
+## Sponsor Tech Components and links to the codes
+- Chainlink: Chainlink VRF is used to generate rebate after purchasing        [(Link)](https://github.com/RLNYC/nftforest/blob/submission/contracts/TreeNFTMarketplace.sol#L9)
+- Polygon: Dapp is deployed to Polygon Testnet        [(Link)](https://mumbai.polygonscan.com/address/0x570e2379CaaF633e399e67f953891458C4bd8Bf2)
+- IPFS: Use Pinata to store images and Off-chain data of tree on IPFS        [(Link)](https://github.com/RLNYC/nftforest/blob/submission/src/components/NFTTokenIds.jsx#L125)
+- Moralis: Use Moralis login and SDK to interact with smart contract         [(Link)](https://github.com/RLNYC/nftforest/blob/submission/src/providers/MoralisDappProvider/MoralisDappProvider.js)
+- Covalent: Obtain user wallet data           [(Link)](https://github.com/RLNYC/nftforest/blob/submission/src/components/ForestMap.jsx#L59)
 
-Sponsor Tech Components:
-- Chainlink: Chainlink VRF is used to generate rebate after purchasing
-- Polygon: Dapp is deployed to Polygon Testnet 
-- IPFS: Use Pinata to store images and Off-chain data of tree on IPFS
-- Moralis: Use Moralis login and SDK to interact with smart contract
-- Covalent: Obtain user wallet data
+# 🚀 Quick Start
 
 📄 Clone or fork this repo:
 ```
